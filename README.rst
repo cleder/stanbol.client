@@ -3,10 +3,10 @@ Engine `Apache Stanbol FISE <http://incubator.apache.org/stanbol/>`_ (see also
 the old `IKS-WIKI <http://wiki.iks-project.eu/index.php/FISE>`_). 
 Edutainment:  Watch the `Video by Olivier Grisel <http://blogs.nuxeo.com/dev/2010/08/introducing-fise-the-restful-semantic-engine.html>`_
  
-FISE offers a RESTful API with basically three methods of interaction:
+Stanbol offers a RESTful API with basically three methods of interaction:
 
 engines
-    stateless interface, submit content to the fise engines and get the 
+    stateless interface, submit content to the stanbol engines and get the 
     resulting enhancements formatted as RDF at once without storing anything on 
     the server-side.
 
@@ -14,7 +14,7 @@ store
     Upload content to the store and in a second step get the enhancements back.
     
 sparql
-    access FISE as a SPARQL endpoint (W3C conform).
+    access Stanbol as a SPARQL endpoint (W3C conform).
     
 This API covers ``engines`` and ``store``. Sparql queries are best done by using 
 existing library `SuRF <http://packages.python.org/SuRF/>`_ which is installed 
@@ -25,36 +25,36 @@ Python API
 
 Initialize::
 
-    >>> from fise.client import FISE
-    >>> fise = FISE('http://localhost:8080/')
+    >>> from stanbol.client import Stanbol
+    >>> stanbol = Stanbol('http://localhost:8080/')
 
 Use the engines::    
     
     >>> somedoc = u"This is an example text."
-    >>> fise.engines(somedoc)
+    >>> stanbol.engines(somedoc)
     <xml...>
     
-    >>> fise.engines(somedoc, format='rdfjson')
+    >>> stanbol.engines(somedoc, format='rdfjson')
     jsonresponse
 
 Use the store, first store content (only plain text is accepted for now)::
     
     >>> id = 'test123'
-    >>> fise.store.content[id] = payload
+    >>> stanbol.store.content[id] = payload
 
 Next get the text back::    
     
-    >>> fise.store.content[id]
+    >>> stanbol.store.content[id]
     u"This is an example text."
 
 Then get the metadata::
     
-    >>> fise.store.metadata(id)
+    >>> stanbol.store.metadata(id)
     <RDF>
     
-And FISE special feature: Get an HTML page about the content::    
+And Stanbol special feature: Get an HTML page about the content::    
 
-    >>> fise.store.page(id)
+    >>> stanbol.store.page(id)
     <HTML>
 
 Install
@@ -62,6 +62,9 @@ Install
 
 Demo Installation
 -----------------
+
+!! This part is working for fise.client and needs to be updated once stanbol.client 
+will be available on pypi.
 
 If you want to try this package as is this is probably a good starting point.
 
@@ -80,31 +83,31 @@ virtualenv is used (instead of easy_install on Debian/Ubuntu
     $ easy_install virtualenv
     $ python2.6 virtualenv  --no-site-packages py
     
-Bootstrap and run the contained buildout. This fetches FISE early adopter 
-release and provides a start script for FISE. It installs all Python 
-dependencies of fise.client and provides a script to run all tests and a Python 
+Bootstrap and run the contained buildout. This fetches Stanbol early adopter 
+release and provides a start script for Stanbol. It installs all Python 
+dependencies of stanbol.client and provides a script to run all tests and a Python 
 shell with all packaged installed::  
 
     $ ./py/bin/python bootstrap.py
     $ ./bin/buildout
 
-Start the FISE semantic engine.
+Start the Stanbol semantic engine.
 
-    $ ./bin/fise-instance
+    $ ./bin/stanbol-instance
     
-Now connect with a webbrower to 
-`http://localhost:8080/ <http://localhost:8080/>`_, the FISE web-frontend.
+Now connect with a webbrowser to 
+`http://localhost:8080/ <http://localhost:8080/>`_, the Stanbol web-frontend.
 
 Running the tests shows if everything working as expected (needs a running 
-``fise-instance``)::
+``stanbol-instance``)::
 
     $ ./bin/tests
     
-Start a Python shell with fise.client included::
+Start a Python shell with stanbol.client included::
 
     $ ./bin/py
         
-    >>> from fise.client import FISE
+    >>> from stanbol.client import Stanbol
     >>>
     
 Installation within existing environment
@@ -112,7 +115,7 @@ Installation within existing environment
 
 To add this package to an existing environment do::
 
-    $ easy_install fise.client
+    $ easy_install stanbol.client
 
 Or if your using ``zc.buildout`` add a line to the eggs in your 
 ``buildout.cfg`` and re-run buildout:: 
@@ -121,7 +124,7 @@ Or if your using ``zc.buildout`` add a line to the eggs in your
     ...
     eggs = 
     ...
-        fise.client
+        stanbol.client
     ...
     
 Or if your'e writing an own python-package add it to the ``install_requires`` 

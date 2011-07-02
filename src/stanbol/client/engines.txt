@@ -1,8 +1,8 @@
-To run this test it needs a running FISE server at localhost port 8080.
+To run this test it needs a running Stanbol server at localhost port 8080.
 
 First import the class::
     
-    >>> from fise.client.engines import Engines
+    >>> from stanbol.client.engines import Engines
     
 Instantiate it::    
     
@@ -28,7 +28,7 @@ But you can not pass anything:
 Its possible to directly get an python rdflib Graph
     
     >>> engines('Paris', parsed=True)
-    <Graph identifier=... (<class 'rdflib.graph.Graph'>)>
+    <Graph identifier=... (<class 'rdflib.graoh.Graph'>)>
     
 But never pass format and parsed together::
 

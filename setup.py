@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.1'
+version = '1.2'
 shortdesc = 'Apache Stanbol FISE: RESTful Python Client.'
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 tests_require = ['interlude']
 
-setup(name='fise.client',
+setup(name='stanbol.client',
       version=version,
       description=shortdesc,
       long_description=longdesc,
@@ -36,7 +36,7 @@ setup(name='fise.client',
 
       ],
       tests_require=tests_require,
-      test_suite="fise.client.tests.test_suite",
+      test_suite="stanbol.client.tests.test_suite",
       extras_require = dict(
           test=tests_require,
       ),

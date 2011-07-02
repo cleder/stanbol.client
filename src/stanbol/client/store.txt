@@ -1,9 +1,9 @@
-To run this test it needs a running FISE server at localhost port 8080.
+To run this test it needs a running Stanbol server at localhost port 8080.
 
 Imports first::
 
     >>> import uuid
-    >>> from fise.client.store import Store
+    >>> from stanbol.client.store import Store
     
 Instatiate a store::    
     
@@ -11,7 +11,7 @@ Instatiate a store::
     
     >> interact(locals())
     
-Lets FISE create an ID for the text.
+Lets Stanbol create an ID for the text.
 ::
     
     >>> content = 'Paris London %s' % uuid.uuid4().hex
@@ -40,7 +40,7 @@ Fetch back content::
     >>> store.get(generated_id) == content
     True
     
-We can get metadata extracted by FISE engines::
+We can get metadata extracted by Stanbol engines::
 
     >>> store.metadata(generated_id)
     '<rdf:RDF...</rdf:RDF>\n'

@@ -1,3 +1,9 @@
+##
+# Created on Jun 5, 2011
+# @author: "Encolpe Degoute"
+# @author: "Jens W. Klein"
+# @author: "Yannis Mazzer"
+    
 from restkit.globals import set_manager, get_manager
 try:
     import eventlet
@@ -8,18 +14,19 @@ except ImportError:
     from restkit import Manager
     set_manager(Manager(max_conn=10))
 
-from fise.client.engines import Engines 
-from fise.client.store import Store 
+from stanbol.client.engines import Engines 
+from stanbol.client.store import Store
 
-class FISE(object):
+class Stanbol(object):
     
     def __init__(self, baseuri):
         self.baseuri = baseuri
         
     @property
     def engines(self):
-        return Engines(self.baseuri)
+        return Engines(self.baseuri, pool=self.pool)
 
     @property
     def store(self):
-        return Store(self.baseuri)
+        return Store(self.baseuri, pool=self.pool)
+
