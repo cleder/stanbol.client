@@ -6,7 +6,7 @@ First import the class::
     
 Instantiate it::    
     
-    >>> engines = Engines('http://localhost:8080/')
+    >>> engines = Engines('http://stanbol.mazzer.info/')
 
 Now lets get the engines default outcome:: 
     
@@ -28,7 +28,7 @@ But you can not pass anything:
 Its possible to directly get an python rdflib Graph
     
     >>> engines('Paris', parsed=True)
-    <Graph identifier=... (<class 'rdflib.graoh.Graph'>)>
+    <Graph identifier=... (<class 'rdflib.graph.Graph'>)>
     
 But never pass format and parsed together::
 

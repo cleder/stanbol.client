@@ -14,12 +14,12 @@ from stanbol.client.base import (
     RDFFORMATS,
 )
 
-## class Store
-class Store(StanbolCommunicator):
+## class ContentHub
+class ContentHub(StanbolCommunicator):
     
-    _subpath = 'store'
+    _subpath = 'contenthub'
 
-    ## Get raw content back from store.
+    ## Get raw content back from contenthub.
     # @param self: the object itself
     # @param cid: 
     def __getitem__(self, cid):
@@ -45,7 +45,7 @@ class Store(StanbolCommunicator):
         except KeyError:
             return default
 
-    ## Adds or updates content to store using given id.
+    ## Adds or updates content to contenthub using given id.
     # @param self: the object itself
     # @param cid: 
     # @param payload:           
@@ -60,7 +60,7 @@ class Store(StanbolCommunicator):
                              'Can\'t put content with id %s to stanbol' % cid, 
                              code=201)
 
-    ## Adds content to store and let FISE create an ID. Returns new ID.
+    ## Adds content to contenthub and let FISE create an ID. Returns new ID.
     # @param self: the object itself
     # @param payload: 
     def add(self, payload):

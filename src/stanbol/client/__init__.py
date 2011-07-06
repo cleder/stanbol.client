@@ -15,7 +15,7 @@ except ImportError:
     set_manager(Manager(max_conn=10))
 
 from stanbol.client.engines import Engines 
-from stanbol.client.store import Store
+from stanbol.client.contenthub import ContentHub
 
 class Stanbol(object):
     
@@ -28,5 +28,5 @@ class Stanbol(object):
 
     @property
     def store(self):
-        return Store(self.baseuri, pool=self.pool)
+        return ContentHub(self.baseuri, pool=self.pool)
 

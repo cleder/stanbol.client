@@ -16,3 +16,4 @@ downloads
 py
 sling
 *.tar.gz
+/factstore
