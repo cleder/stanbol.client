@@ -16,6 +16,7 @@ except ImportError:
 
 from stanbol.client.engines import Engines 
 from stanbol.client.contenthub import ContentHub
+from stanbol.client.console import Console
 
 class Stanbol(object):
     
@@ -29,4 +30,8 @@ class Stanbol(object):
     @property
     def store(self):
         return ContentHub(self.baseuri, pool=self.pool)
+    
+    @property
+    def console(self):
+        return Console(self.baseuri, pool=self.pool)
 
