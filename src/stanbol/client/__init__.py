@@ -28,7 +28,7 @@ class Stanbol(object):
         return Engines(self.baseuri, pool=self.pool)
 
     @property
-    def store(self):
+    def contentHub(self):
         return ContentHub(self.baseuri, pool=self.pool)
     
     @property
