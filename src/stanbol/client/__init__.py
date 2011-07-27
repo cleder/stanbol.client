@@ -25,13 +25,13 @@ class Stanbol(object):
         
     @property
     def engines(self):
-        return Engines(self.baseuri, pool=self.pool)
+        return Engines(self.baseuri)
 
     @property
     def contentHub(self):
-        return ContentHub(self.baseuri, pool=self.pool)
+        return ContentHub(self.baseuri)
     
     @property
     def console(self):
-        return Console(self.baseuri, pool=self.pool)
+        return Console(self.baseuri)
 

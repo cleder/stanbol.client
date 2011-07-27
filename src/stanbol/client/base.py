@@ -27,7 +27,7 @@ class StanbolCommunicator(object) :
     # @param self: the object itself
     # @param baseuri: the base uri of the stanbol webservice
     # @param pool:
-    def __init__(self, baseuri, pool=None):
+    def __init__(self, baseuri):
         ''' The constructor of the StanbolCommunicator class
         
         '''
