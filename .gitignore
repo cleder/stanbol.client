@@ -17,3 +17,4 @@ py
 sling
 *.tar.gz
 /factstore
+*.sw?
