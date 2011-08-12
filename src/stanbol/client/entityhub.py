@@ -1,6 +1,6 @@
 import os
 import urlparse
-
+import urllib
 from restkit.errors import (
     ResourceNotFound
 )
@@ -89,8 +89,10 @@ class EntityHubSite(EntityHub):
             params['offset'] = offset
         
         req = 'find'
+        content = urllib.urlencode(params)
+        print params
         try:
-            response = self._resource.post(path = req, params_dict = params)
+            response = self._resource.post(path = req, payload = content)
         except ResourceNotFound, e:
             raise KeyError, e
             
