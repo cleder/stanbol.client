@@ -1,5 +1,11 @@
-import os
-import urlparse
+""" 
+@package stanbol.client
+Created on Jun 5, 2011
+@author: "Encolpe Degoute"
+@author: "Jens W. Klein"
+@author: "Yannis Mazzer"
+"""
+
 import urllib
 from restkit.errors import (
     ResourceNotFound
@@ -7,7 +13,6 @@ from restkit.errors import (
 
 from stanbol.client.base import (
     StanbolCommunicator,
-    RDFFORMATS,
 )
 
 class EntityHub(StanbolCommunicator):
@@ -37,12 +42,36 @@ class EntityHub(StanbolCommunicator):
         return response.body_string()
     #
 
-    def find(self, name):
-        pass
+    def find(self, name, field = None, lang = None, limit = None, offset = None):
+        params = {}
+        if name:
+            params['name'] = name
+        if field:
+            params['field'] = field
+        if lang:
+            params['lang'] = lang
+        if limit:
+            params['limit'] = limit
+        if offset:
+            params['offset'] = offset
+        
+        req = 'find'
+        content = urllib.urlencode(params)
+        try:
+            response = self._resource.post(path = req, payload = content)
+        except ResourceNotFound, e:
+            raise KeyError, e
+            
+        return response.body_string()
     #
 
-    def query(self, json):
-        pass
+    def query(self, query):
+        req = 'query'
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        response = self._resource.post(path = req, payload = query, headers=headers)
+        return response.body_string()
     #
 
     def mapping(self, uri):
@@ -66,8 +95,6 @@ class EntityHubSite(EntityHub):
 
     def get_entity(self, uri):
         req = 'entity' 
-        print req
-        print self._resource
         try:
             response = self._resource.get(path = req, params_dict = {'id': uri})
         except ResourceNotFound, e:
@@ -75,7 +102,7 @@ class EntityHubSite(EntityHub):
         return response.body_string()
     #
 
-    def find(self, name, field, lang, limit, offset):
+    def find(self, name, field=None, lang=None, limit=None, offset=None):
         params = {}
         if name:
             params['name'] = name
@@ -90,7 +117,6 @@ class EntityHubSite(EntityHub):
         
         req = 'find'
         content = urllib.urlencode(params)
-        print params
         try:
             response = self._resource.post(path = req, payload = content)
         except ResourceNotFound, e:
@@ -100,10 +126,11 @@ class EntityHubSite(EntityHub):
     #
 
     def query(self, query):
+        req = 'query'
         headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
-        response = self._resource.post(payload = query, headers=headers)
+        response = self._resource.post(path = req, payload = query, headers=headers)
         return response.body_string()
     #
 #

@@ -1,0 +1,42 @@
+To run this test it needs a running Stanbol server at localhost port 8888
+
+First import the class::
+
+    >>> from stanbol.client.sparql import SparQL
+
+Instantiate it::
+
+    >>> sparql = SparQL('http://localhost:8888')
+
+Let's define a valid SparQL query::
+    >>> query = "PREFIX fise: <http://fise.iks-project.eu/ontology/> \
+    ...           PREFIX dc:   <http://purl.org/dc/terms/> \
+    ...           SELECT distinct ?enhancement ?content ?engine ?extraction_time \
+    ...           WHERE { \
+    ...             ?enhancement a fise:Enhancement . \
+    ...             ?enhancement fise:extracted-from ?content . \
+    ...             ?enhancement dc:creator ?engine . \
+    ...             ?enhancement dc:created ?extraction_time . \
+    ...           } \
+    ...           ORDER BY DESC(?extraction_time) LIMIT 5"
+
+Now send the query to the Stanbol Instance
+    >>> sparql(query)
+    <restkit.wrappers.Response object at ...>
+    
+Let's try the same with an invalid SparQL query::
+    >>> query = "WHERE { \
+    ...             ?enhancement a fise:Enhancement . \
+    ...             ?enhancement fise:extracted-from ?content . \
+    ...             ?enhancement dc:creator ?engine . \
+    ...             ?enhancement dc:created ?extraction_time . \
+    ...           } \
+    ...           ORDER BY DESC(?extraction_time) LIMIT 5"
+    >>> sparql(query)
+    Traceback (most recent call last):
+    ...
+    RequestFailed: <html>
+    ...
+    </html>
+
+

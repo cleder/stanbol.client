@@ -1,9 +1,11 @@
-##
-# Created on Jun 5, 2011
-# @author: "Encolpe Degoute"
-# @author: "Jens W. Klein"
-# @author: "Yannis Mazzer"
-    
+""" 
+@package stanbol.client
+Created on Jun 5, 2011
+@author: "Encolpe Degoute"
+@author: "Jens W. Klein"
+@author: "Yannis Mazzer"
+"""
+
 from restkit.globals import set_manager, get_manager
 try:
     import eventlet
@@ -18,6 +20,7 @@ from stanbol.client.engines import Engines
 from stanbol.client.contenthub import ContentHub
 from stanbol.client.entityhub import EntityHub, EntityHubSite
 from stanbol.client.console import Console
+from stanbol.client.sparql import SparQL
 
 class Stanbol(object):
     
@@ -44,3 +47,6 @@ class Stanbol(object):
     def console(self):
         return Console(self.baseuri)
 
+    @property
+    def sparql(self):
+        return SparQL(self.baseuri)

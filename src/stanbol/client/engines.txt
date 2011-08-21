@@ -1,4 +1,4 @@
-To run this test it needs a running Stanbol server at localhost port 8080.
+To run this test it needs a running Stanbol server at localhost port 8888.
 
 First import the class::
     
@@ -6,7 +6,7 @@ First import the class::
     
 Instantiate it::    
     
-    >>> engines = Engines('http://stanbol.mazzer.info/')
+    >>> engines = Engines('http://localhost:8888/')
 
 Now lets get the engines default outcome:: 
     

@@ -1,0 +1,55 @@
+To run this test it needs a running Stanbol server at localhost port 8888
+
+Import First::
+
+    >>> from stanbol.client.entityhub import EntityHub, EntityHubSite
+
+
+Instantiate an EntityHub::
+
+    >>> entityhub = EntityHub('http://localhost:8888')
+
+
+
+Instantiate an EntityHubSite::
+
+    >>> entityhubsite = EntityHubSite('http://localhost:8888')
+
+    >>> entityhub.get_entity("http://dbpedia.org/resource/Paris")
+
+    >>> #entityhub.lookup()
+
+    >>> entityhub.find(name='Paris')
+
+    >>> #entityhub.query()
+
+    >>> #entityhub.mapping()
+
+List referenced sites::
+
+    >>> entityhubsite.get_referenced_sites()
+    '[...]'
+
+Get valid Entity informations::
+
+    >>> entityhubsite.get_entity("http://dbpedia.org/resource/Paris")
+    '{...}'
+
+Get invalid Entity informations::
+
+    >>> entityhubsite.get_entity("http://dbpedia.")
+    Traceback (most recent call last):
+    ...
+    KeyError: ResourceNotFound()
+
+Search for an Entity::
+
+    >>> entityhubsite.find(name='Paris')
+    '{...}'
+
+Send a JSON query::
+    >>> json = '{"selected": ["http:\/\/www.w3.org\/2000\/01\/rdf-schema#label", "http:\/\/www.w3.org\/1999\/02\/22-rdf-syntax-ns#type"], "offset": "0", "limit": "3", "constraints": [{   "type": "reference", "field": "http:\/\/www.w3.org\/1999\/02\/22-rdf-syntax-ns#type", "value": "http:\/\/dbpedia.org\/ontology\/Place", } ]}'
+    >>> entityhubsite.query(json)
+    '{}'
+
+

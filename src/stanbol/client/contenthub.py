@@ -1,10 +1,11 @@
-## @package stanbol.client
-# Created on Jun 5, 2011
-# @author: "Encolpe Degoute"
-# @author: "Jens W. Klein"
-# @author: "Yannis Mazzer"
+""" 
+@package stanbol.client
+Created on Jun 5, 2011
+@author: "Encolpe Degoute"
+@author: "Jens W. Klein"
+@author: "Yannis Mazzer"
+""" 
 
-import os
 import urlparse
 from restkit.errors import (
     ResourceNotFound
@@ -14,15 +15,19 @@ from stanbol.client.base import (
     RDFFORMATS,
 )
 
-## class ContentHub
 class ContentHub(StanbolCommunicator):
+    """
+    class ContentHub
+    """
     
     _subpath = 'contenthub'
 
-    ## Get raw content back from contenthub.
-    # @param self: the object itself
-    # @param cid: 
     def __getitem__(self, cid):
+        """
+        Get raw content back from contenthub.
+        @param self: the object itself
+        @param cid: 
+        """
         headers = {
             'Accept': 'text/plain',
         }        
@@ -35,21 +40,24 @@ class ContentHub(StanbolCommunicator):
                              'Cant get content with id %s from stanbol' % id)
         return response.body_string()
     
-    ##
-    # @param self: the object itself
-    # @param cid: 
-    # @param default: 
     def get(self, cid, default=None):
+        """
+        @param self: the object itself
+        @param cid: 
+        @param default: 
+        """
         try:
             return self[cid]
         except KeyError:
             return default
 
-    ## Adds or updates content to contenthub using given id.
-    # @param self: the object itself
-    # @param cid: 
-    # @param payload:           
     def __setitem__(self, cid, payload):
+        """
+        Adds or updates content to contenthub using given id.
+        @param self: the object itself
+        @param cid: 
+        @param payload:
+        """
         headers = {
             'Content-Type': 'text/plain',
         }        
@@ -60,10 +68,12 @@ class ContentHub(StanbolCommunicator):
                              'Can\'t put content with id %s to stanbol' % cid, 
                              code=201)
 
-    ## Adds content to contenthub and let FISE create an ID. Returns new ID.
-    # @param self: the object itself
-    # @param payload: 
     def add(self, payload):
+        """
+        Adds content to contenthub and let FISE create an ID. Returns new ID.
+        @param self: the object itself
+        @param payload: 
+        """
         headers = {
             'Content-Type': 'text/plain',
         }        
@@ -74,12 +84,14 @@ class ContentHub(StanbolCommunicator):
         path = path.split('/')
         return path[-1]        
 
-    ## Get extracted rdf+xml metadata of content with given id.
-    # @param self: the object itself
-    # @param cid: 
-    # @param format: 
-    # @param parsed: 
     def metadata(self, cid, format='rdfxml', parsed=False):
+        """
+        Get extracted rdf+xml metadata of content with given id.
+        @param self: the object itself
+        @param cid: 
+        @param format: 
+        @param parsed: 
+        """
         self._check_format(format, parsed)
         headers = {
             'Accept': RDFFORMATS[format],
@@ -90,10 +102,12 @@ class ContentHub(StanbolCommunicator):
                              'Cant get metadata with id %s from stanbol' % cid)
         return self._make_result(response, format, parsed)
     
-    ## URL to HTML summary view of the extracted RDF metadata.
-    # @param self: the object itself
-    # @param cid: 
     def page(self, cid):
+        """
+        URL to HTML summary view of the extracted RDF metadata.
+        @param self: the object itself
+        @param cid:         
+        """
         headers = {
             'Accept': 'text/html',
         }        

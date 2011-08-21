@@ -62,6 +62,8 @@ optionflags = doctest.NORMALIZE_WHITESPACE | \
 TESTFILES = [
     'engines.txt',
     'contenthub.txt',
+    'sparql.txt',
+    'entityhub.txt',
 ]
 
 def test_suite():
